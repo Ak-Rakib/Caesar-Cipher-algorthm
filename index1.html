@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher Decryption</title>
+</head>
+<body>
+
+<script>
+    // Function to decrypt a message using the Caesar cipher
+    function caesarDecrypt(ciphertext, shift) {
+        return ciphertext
+            .split('')
+            .map(char => {
+                // Check if the character is a letter
+                if (/[a-zA-Z]/.test(char)) {
+                    const baseCharCode = char.toUpperCase() === char ? 'A'.charCodeAt(0) : 'a'.charCodeAt(0);
+                    const decryptedCharCode = (char.charCodeAt(0) - shift - baseCharCode + 26) % 26 + baseCharCode;
+                    return String.fromCharCode(decryptedCharCode);
+                } else {
+                    return char; // Leave non-alphabetic characters unchanged
+                }
+            })
+            .join('');
+    }
+
+    // Example usage
+    const encryptedMessage = 'Rovvy, JVSQ!';
+    const shift = 10;
+
+    const decryptedMessage = caesarDecrypt(encryptedMessage, shift);
+    console.log('Decrypted Message:', decryptedMessage);
+</script>
+
+</body>
+</html>
